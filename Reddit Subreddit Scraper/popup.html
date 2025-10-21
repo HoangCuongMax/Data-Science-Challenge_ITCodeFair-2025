@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reddit Subreddit Scraper</title>
+  <style>
+    body { 
+      min-width: 570px; 
+      padding: 20px; 
+      font-family: 'Poppins', sans-serif; 
+    }
+    #message {
+      font-size: 16px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-decoration: none;
+    }
+    .button {
+      padding: 10px 20px; 
+      border: none;
+      color: white;
+      background-color: #007BFF;
+      cursor: pointer; 
+      transition: background-color 0.3s ease; 
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .button:hover {
+      background-color: #0056b3; 
+    }
+    .input {
+      padding: 8px 15px;
+      margin-right: 10px; 
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #dddddd;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 24px;
+      margin: 0;
+    }
+    h4 {
+      margin: 0;
+      padding-top: 10px;
+    }
+    h4 a {
+      color: #676767;
+      text-decoration: none;
+    }
+    h4 a:hover {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    select {
+      margin-bottom: 10px;
+    }
+  </style>  
+</head>
+<body>
+  <h1>&#x1F5FA;&#xFE0F; Reddit Subreddit Scraper</h1> 
+  <div id="message">Ready to scrape Reddit subreddits!</div>
+  <label for="subredditSelect">Select Subreddit:</label>
+  <select id="subredditSelect">
+    <option value="northernterritory">r/northernterritory</option>
+    <option value="darwin">r/darwin</option>
+  </select>
+  <label for="queryInput">Query (e.g., tourism, economy):</label>
+  <input type="text" id="queryInput" class="input" placeholder="Enter query" />
+  <button id="actionButton" class="button">Scrape Reddit Posts and Comments</button>
+  <button id="downloadCsvButton" class="button" style="margin-left: 10px;" disabled>Download as CSV</button>
+  <input type="text" id="filenameInput" class="input" placeholder="Enter file name" style="margin-left: 10px;" />
+  <table id="resultsTable">
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script src="popup.js"></script>
+</body>
+</html>
