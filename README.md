@@ -17,8 +17,8 @@ What themes appear in visitor feedback, how does sentiment vary, and which issue
 | [Reddit notebook](Reddit_review.ipynb) | Discussion and review analysis notebook |
 | [TripAdvisor notebook](Trip-advisor.ipynb) | Collection experiment, text preparation, sentiment and topic analysis |
 | [Presentation outline](Data_Science_Challenge_Presentation_Slides.markdown) | Competition presentation material and proposed recommendations |
-| [Google Maps datasets](Google%20Map%20Review%20-%20Dataset) | Destination-level CSV files |
-| [Reddit dataset](Reddit%20Review%20-%20Dataset) | Collected discussion data |
+| [Google Maps datasets](https://github.com/HoangCuongMax/Data-Science-Challenge_ITCodeFair-2025/tree/main/Google%20Map%20Review%20-%20Dataset) | Destination-level CSV files |
+| [Reddit dataset](https://github.com/HoangCuongMax/Data-Science-Challenge_ITCodeFair-2025/tree/main/Reddit%20Review%20-%20Dataset) | Collected discussion data |
 
 Start with a notebook and its saved outputs, then inspect the associated CSV files. Presentation scenarios should be read alongside the limitations below.
 
