@@ -1,89 +1,74 @@
-# NT Tourism Review Analysis Workflow
+# NT Tourism Review Analysis
+**Python · Text analytics · Northern Territory tourism**
 
-## Step 1: Data Collection Using Custom Chrome Extensions
-We built browser extensions (HTML/JS-based) to scrape reviews ethically from public pages, limiting to the last 3 years for relevance. This avoids APIs and ensures compliance with public data access.
+An exploratory CDU IT Codefair 2025 project investigating what visitor reviews can reveal about tourism experiences and opportunities for service improvement.
 
-**Sources:**
-- **Google Maps Extension:** Navigates to a place page (e.g., search "Uluru" on maps.google.com), scrolls to load reviews, extracts reviewer, rating (1–5), date, and text. Outputs to CSV.  
-- **Reddit Extension:** Uses old.reddit.com for threads (e.g., search "Uluru travel" threads), loads all comments, extracts author, score, date, and text.  
-- **TripAdvisor Extension:** Similar process, for cross-validation, scraping review pages.  
+[Portfolio overview](https://docs.google.com/document/d/1hz0K7N4KQkP5eKUZLWhO6hqBWVymC7neSLReXxuw754) · [Max's profile](https://github.com/HoangCuongMax)
 
-**Application:**
-- **Uluru:** ~500 reviews from Google Maps + Reddit threads on r/AustraliaTravel. Focused on keywords like "Uluru experience."  
-- **Katherine Hot Springs:** ~300 reviews from Google Maps + Reddit threads like "Katherine Gorge tips." Emphasized relaxation themes.  
-- **Kakadu National Park:** ~400 reviews from Google Maps + Reddit threads (e.g., "Kakadu wet season"). Captured seasonal feedback.  
+## Business question
 
-We combine CSVs from sources for a unified dataset, ensuring no personal data is stored.
+What themes appear in visitor feedback, how does sentiment vary, and which issues deserve further investigation by tourism stakeholders?
 
----
+## Explore the analysis
 
-## Step 2: Data Loading and Preprocessing in Python
-Using Pandas and NLTK, we load the CSVs and clean the text for analysis. This standardizes data across destinations.
+| Material | Contents |
+| --- | --- |
+| [Google Maps notebook](Google_map_review.ipynb) | Review analysis notebook |
+| [Reddit notebook](Reddit_review.ipynb) | Discussion and review analysis notebook |
+| [TripAdvisor notebook](Trip-advisor.ipynb) | Collection experiment, text preparation, sentiment and topic analysis |
+| [Presentation outline](Data_Science_Challenge_Presentation_Slides.markdown) | Competition presentation material and proposed recommendations |
+| [Google Maps datasets](Google%20Map%20Review%20-%20Dataset) | Destination-level CSV files |
+| [Reddit dataset](Reddit%20Review%20-%20Dataset) | Collected discussion data |
 
-**Application:**
-- **Uluru:** Cleaned ~500 reviews. Removed noise like emojis, yielding clean text such as "amazing rock spiritual experience."  
-- **Katherine Hot Springs:** Highlighted words like "relaxing warm water" vs. "crowded summer."  
-- **Kakadu:** Captured terms like "flooded roads" (wet season). Prepared for sentiment analysis.  
+Start with a notebook and its saved outputs, then inspect the associated CSV files. Presentation scenarios should be read alongside the limitations below.
 
-This step ensures data is ready for ML, handling variations like Reddit’s informal language.
+## Analytical workflow
 
----
+1. Assemble review records from the available source datasets.
+2. Inspect missing text, duplicates, destination labels and date coverage.
+3. Prepare text for word-frequency, sentiment and topic analysis.
+4. Review inferred labels and themes against the original text.
+5. Translate supported patterns into questions and recommendations for stakeholders.
 
-## Step 3: Sentiment Analysis with NLTK VADER
-We use VADER to score sentiments (compound score: -1 to +1), classifying reviews as Positive, Neutral, or Negative. This reveals overall tourist satisfaction.
+The TripAdvisor notebook includes pandas, NLTK VADER, scikit-learn topic modelling, matplotlib and word clouds. Techniques and setup vary across notebooks; consult each notebook's imports and data-loading cells.
 
-**Application:**
-- **Uluru:** Avg. score: 0.75 → Mostly Positive. Pros: "Spiritual awe"; Cons: "High entry fees." Strong correlation between ratings and sentiment.  
-- **Katherine Hot Springs:** Avg. score: 0.68. Positives: "Natural healing"; Negatives: "Limited facilities" during peak times.  
-- **Kakadu:** Avg. score: 0.72. Positives: "Wildlife adventures"; Negatives: "Mosquitoes and remote access."  
+## Review or run locally
 
----
+Clone the repository and open the notebooks in a Jupyter-compatible environment:
 
-## Step 4: Topic Modeling with Gensim LDA
-We model topics to uncover themes like *culture* or *accessibility*, using 5 topics for interpretability.
+```sh
+git clone https://github.com/HoangCuongMax/Data-Science-Challenge_ITCodeFair-2025.git
+cd Data-Science-Challenge_ITCodeFair-2025
+```
 
-**Application:**
-- **Uluru:** Topics included "rock climb view" (adventure) and "cultural indigenous respect" (heritage). Culture emerged as dominant.  
-- **Katherine Hot Springs:** Topics: "water relax swim" (leisure) and "hot natural spring" (unique features). Showed spa-like enhancement opportunities.  
-- **Kakadu:** Topics: "wildlife boat tour" (activities) and "wet season flood" (challenges). Word clouds emphasized biodiversity.  
+Install the dependencies required by the notebook you choose, check input paths, and review cells before running them. Some cells perform external collection or download NLTK resources. A pinned environment and a fresh end-to-end reproduction are not yet documented.
 
----
+To run the TripAdvisor collection cell, provide your own credential through the `TRIPADVISOR_API_KEY` environment variable. Do not put credentials in notebook source or outputs. To inspect the existing analysis, start with the saved notebook outputs and available CSVs.
 
-## Step 5: Clustering with Scikit-Learn
-We vectorize text with TF-IDF, cluster into 5 groups, and visualize with PCA to segment tourists.
+## Repository map
 
-**Application:**
-- **Uluru:** Clusters included *Adventure seekers* ("hike sunrise") and *Cultural enthusiasts* ("aboriginal story"). Guided package design.  
-- **Katherine Hot Springs:** Segmented into *Relaxation-focused* ("soak peace") and *Family-oriented* ("kids friendly").  
-- **Kakadu:** Segments included *Nature lovers* ("birds crocodile") and *Adventure extremists* ("4WD tracks").  
+```text
+Google_map_review.ipynb          Google Maps analysis
+Reddit_review.ipynb              Reddit analysis
+Trip-advisor.ipynb               TripAdvisor collection and analysis
+Google Map Review - Dataset/    Destination CSVs
+Reddit Review - Dataset/        Discussion CSVs
+Google Map Scraper/             Collection extension
+Reddit Comment Scraper/         Collection extension
+Reddit Subreddit Scraper/       Collection extension
+Data_Science_Challenge_...       Presentation outline
+```
 
----
+Existing filenames are retained so notebook paths and external links continue to work.
 
-## Step 6: Deriving Insights, Recommendations, and Predictions
-We synthesize results into pros/cons, propose actions, and predict impacts using baseline NT data (1.58M visitors).
+## Interpretation & limitations
 
-**Application:**
-- **Uluru:**  
-  - Insights: Leverage culture, address costs.  
-  - Recs: Indigenous tours, government subsidies.  
-  - Prediction: +10–15% growth → $48M–56M extra impact.  
-- **Katherine Hot Springs:**  
-  - Insights: Positive nature appeal, negative crowding.  
-  - Recs: Expand facilities, eco-spa bundles.  
-  - Prediction: +8–12% boost → +$20M regional impact.  
-- **Kakadu:**  
-  - Insights: Wildlife strong, access weak.  
-  - Recs: Seasonal guides, infrastructure upgrades.  
-  - Prediction: +12–18% growth → 300–500 new jobs.  
+- Online reviewers are a self-selected sample; findings do not represent every visitor.
+- Sentiment scores are model outputs, not direct measures of satisfaction or validated causal effects.
+- Topic labels require human review. Sampling, source coverage and collection dates affect comparisons.
+- Presentation figures for visitor growth, revenue or jobs are proposed scenarios, not demonstrated outcomes.
+- Verify dataset provenance and source permissions before reusing or redistributing records. Public availability alone does not establish unrestricted reuse.
 
----
+## Next evidence to add
 
-## Step 7: Scaling to Other Destinations
-Repeat Steps 1–6 with new datasets (e.g., Darwin Harbor). Update file paths and rerun the notebook.
-
-This process is:
-- **Ethical:** Public data only.  
-- **Advanced:** ML integration.  
-- **Practical:** Directly supports NT’s tourism goals.  
-
-A Jupyter Notebook replicates the process fully (submitted as work-in-progress by Oct 1, 2025). For the pitch, we’ll demo live with Uluru data.
+Document the final dataset counts, checked charts, evaluation method and each team member's contribution. The [editable case-study template](https://docs.google.com/document/d/1ZjpAQmYszHWpq28MS1DXD9E30w-dpJkvo1ptLnKIet4) provides a structure for that write-up.
